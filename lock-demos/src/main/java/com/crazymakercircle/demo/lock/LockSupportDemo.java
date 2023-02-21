@@ -40,6 +40,8 @@ public class LockSupportDemo {
         t2.start();
         sleepSeconds(1);
         //中断线程一
+        //如果此线程处于阻塞状态（Object.wait()、Thread.join()和Thread.sleep()），就会立马退出阻塞，抛出InterruptedException异常
+        //如果线程正在处于运行之中，线程就不收
         t1.interrupt();
         //唤醒线程二
         LockSupport.unpark(t2);

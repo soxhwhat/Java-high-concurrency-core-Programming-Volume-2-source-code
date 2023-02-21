@@ -36,6 +36,8 @@ public class CreateDemo3 {
 
     public static void main(String args[]) throws InterruptedException {
         ReturnableTask task = new ReturnableTask();
+        //FutureTask类才是真正的在Thread与Callable之间搭桥的类。
+//        FutureTask类不仅实现了Future接口，还实现了Runnable接口，或者更加准确地说，FutureTask类实现了RunnableFuture接口。
         FutureTask<Long> futureTask = new FutureTask<Long>(task);
         Thread thread = new Thread(futureTask, "returnableThread");
         thread.start();

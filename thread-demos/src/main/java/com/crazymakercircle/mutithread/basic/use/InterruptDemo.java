@@ -45,8 +45,10 @@ public class InterruptDemo {
         Thread thread2 = new SleepThread();
         thread2.start();
         sleepSeconds(2);//等待2秒
+        //被打断的sleepThread-1线程停止睡眠，并捕获到InterruptedException受检异常。程序在异常处理时直接返回了，其后面的执行逻辑被跳过。
         thread1.interrupt(); //打断线程1
         sleepSeconds(5);//等待5秒
+        //由于此时线程已经结束休眠，所以此时调用 interrupt 不会触发异常
         thread2.interrupt();  //打断线程2，此时线程2已经终止
         sleepSeconds(1);//等待1秒
         Print.tco("程序运行结束.");

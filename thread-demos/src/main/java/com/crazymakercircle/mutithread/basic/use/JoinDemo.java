@@ -53,7 +53,7 @@ public class JoinDemo {
         Thread thread2 = new SleepThread();
         thread2.start();
         try {
-            thread2.join(5000);//限时合并，限时1秒
+            thread2.join(1000);//限时合并，限时1秒
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

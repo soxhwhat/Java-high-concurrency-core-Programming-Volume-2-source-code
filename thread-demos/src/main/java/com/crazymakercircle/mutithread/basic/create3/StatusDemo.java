@@ -12,6 +12,8 @@ import static com.crazymakercircle.util.ThreadUtil.sleepSeconds;
 
 /**
  * Created by 尼恩@疯狂创客圈.
+ * 为了演示线程的RUNNABLE状态，在下面的案例中设计一个两个线程轮番计数的公共的静态变量turn。
+ * 两个线程中有一个同样的for循环，当线程占用时间片的时候，都对静态变量turn进行累加，直到turn的值达到上限值MAX_TURN。
  */
 
 public class StatusDemo {
@@ -108,14 +110,12 @@ public class StatusDemo {
     @Test
     public void testBlocked() {
         final Object lock = new Object();
-        new Thread() {
-            public void run() {
-                synchronized (lock) {
-                    System.out.println("i got lock, but don't release");
-                    ThreadUtil.sleepMilliSeconds(1000 * 1000);
-                }
+        new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("i got lock, but don't release");
+                sleepMilliSeconds(1000 * 1000);
             }
-        }.start();
+        }).start();
         ThreadUtil.sleepMilliSeconds(100 * 1000);
         synchronized (lock) {
             ThreadUtil.sleepMilliSeconds(30 * 1000);

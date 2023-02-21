@@ -19,13 +19,10 @@ public class CreateDemo4 {
 
         pool.execute(new DemoThread()); //执行线程实例
         //执行Runnable执行目标实例
-        pool.execute(new Runnable() {
-            @Override
-            public void run() {
-                for (int j = 1; j < MAX_TURN; j++) {
-                    Print.cfo(getCurThreadName() + ", 轮次：" + j);
-                    sleepMilliSeconds(10);
-                }
+        pool.execute(() -> {
+            for (int j = 1; j < MAX_TURN; j++) {
+                Print.cfo(getCurThreadName() + ", 轮次：" + j);
+                sleepMilliSeconds(10);
             }
         });
         //提交Callable 执行目标实例
